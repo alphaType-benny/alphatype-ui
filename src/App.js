@@ -6,81 +6,65 @@
 //Style page
 //About (multipage)
 
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+var timerInterval
+
+const Timer = ({start, now, time}) => {
+  if (!start){
+    return <h3>Timer starts from first press!</h3>
+  }
+  else if (!time){
+    return <h3><b>Timer:</b> {(now-start)/1000}s</h3>
+  }
+  return <h3><b>Your alphatime is:</b> {(now-start)/1000}s !</h3>
+  
+}
 
 const AlphaInput = () =>{
   const [start, setStart] = useState("")
+  const [now, setNow] = useState("")
+  const [totalTime, setTotalTime] = useState("")
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
-  const timer = () =>{
-    let offset, clock, interval
-
-    const start = () =>{
-      offset = Date.now()
-    }
-
-    const delta = () =>{
-      const now = Date.now()
-      const d = now - offset
-      offset = now
-      return d
-    }
-
-    const update = () =>{
-      clock += delta()
-      render()
-    }
-
-    const render = () =>{
-      console.log(clock);
-    }
-
-    interval = setInterval(update(), 1)
-
-    const stop = () => {
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
-      }
-    }
-
-    const reset = () =>{
-      clock = 0 
-      render(0)
-    }
-
-    return (
-      {start, stop, reset}
-    )
-  }
 
   const spellCheck = (idx, letter, value) =>{
 
-    if (letter === "a"){
-      setStart(Date.now)
-      const interval = setInterval(() => {
-        console.log("log!");
-      }, 1000);
-      //clearInterval()
+    if (!start){
+      setStart(Date.now())
     }
 
     if (value === letter) {
-      if(letter === "b"){
-        let finish = Date.now()
-        console.log(`Finished in ${(finish-start)/1000}`)
+      if (letter === "a"){
+        timerInterval = setInterval(() => {
+          let varNow = Date.now()
+          setNow(varNow)
+        }, 1);
       }
-      return letter!=="z" ? document.getElementById(idx+1).focus() : null
+      if(letter === "z"){
+        clearInterval(timerInterval)
+        setTotalTime((now-start)/1000)
+      }
+      if(letter!=="z"){
+        document.getElementById(idx+1).removeAttribute("disabled")
+        document.getElementById(idx+1).focus()
+      }
     }
+
   }
 
   return(
     <div>
+      <Timer
+        now={now}
+        start={start}
+        time={totalTime}
+      />
       {alphabet.map( (a, idx) => {
         return (
           <span key={idx}>
           {idx===13?<br/>:""}
           <label> {a} </label>
           <input
+            disabled={idx !== 0 ? "disabled" : ""}
             type="text" 
             id={idx}
             maxLength="1"
@@ -95,8 +79,6 @@ const AlphaInput = () =>{
 }
 
 const App = () => {
-
-
 
   return(
     <div>
