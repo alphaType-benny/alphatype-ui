@@ -70,6 +70,7 @@ const AlphaInput = () =>{
             maxLength="1"
             onChange={(e)=>spellCheck(idx, a, e.target.value)}
             style={{width: "10px"}}
+            autocomplte="false"
           />
         </span>
         )
