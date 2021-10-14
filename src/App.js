@@ -8,13 +8,15 @@
 
 import React from 'react'
 import LetterInput from "./components/LetterInput"
+import Login from "./components/Login"
 
 const App = () => {
 
   return(
-    <div>
-      <h2>alphatype</h2>
+    <div style={{textAlign: 'center'}}>
+      <h1>alphatype</h1>
       <LetterInput/>
+      <Login/>
     </div>
   )
 } 

@@ -37,29 +37,32 @@ const LetterInput = () =>{
     }
   
     return(
-      <div className = "container">
+      <div className = "container" style={{border:"1px black solid"}}>
+        <br/>
         <Timer
           now={now}
           start={start}
           totalTime={totalTime}
         />
-        {alphabet.map( (a, idx) => {
-        return (
-            <span key={idx}>
-            {idx===13?<br/>:""}
-            <label> {a} </label>
-            <input
-                disabled={idx !== 0 ? "disabled" : ""}
-                type="text"
-                id={idx}
-                maxLength="1"
-                onChange={(e)=>spellCheck(idx, a, e.target.value)}
-                style={{width: "20px"}}
-                autoComplete="off"
-            />
-            </span>
-        )
-        })}
+        <div>
+            {alphabet.map( (a, idx) => {
+            return (
+                <span key={idx}>
+                {idx===13?<br/>:""}
+                <label> {a} </label>
+                <input
+                    disabled={idx !== 0 ? "disabled" : ""}
+                    type="text"
+                    id={idx}
+                    maxLength="1"
+                    onChange={(e)=>spellCheck(idx, a, e.target.value)}
+                    style={{width: "20px"}}
+                    autoComplete="off"
+                />
+                </span>
+            )
+            })}
+        </div>
       </div>
     )
   }
