@@ -63,6 +63,7 @@ const LetterInput = () =>{
             )
             })}
         </div>
+        <br/>
       </div>
     )
   }
