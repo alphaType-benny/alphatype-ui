@@ -9,14 +9,14 @@ const sortResults = (scores) => {
 }
 
 const Leaderboard =  () => {
-    const [topScores,setTopScores] = useState([])
+    // const [topScores,setTopScores] = useState([])
     const [users,setUsers] = useState([])
     let usersTopScore = []
     let topPlayers = []
 
     useEffect(()=>{
-        resultsService.allResults()
-            .then(res => setTopScores(sortResults(res)))
+        // resultsService.allResults()
+        //     .then(res => setTopScores(sortResults(res)))
 
         usersService.getAll()
             .then(res => setUsers(res))

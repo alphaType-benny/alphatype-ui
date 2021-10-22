@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: grid;
+  border: 1px black solid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 150px);
+}
+
+.ctr-display {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  border:1px black solid;
+}
+
+.sec-display {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  border:1px black solid;
+}
+
+.right-display {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  border:1px black solid;
+}

@@ -37,7 +37,7 @@ const LetterInput = () =>{
     }
   
     return(
-      <div className = "container" style={{border:"1px black solid"}}>
+      <div>
         <br/>
         <Timer
           now={now}

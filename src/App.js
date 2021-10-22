@@ -7,18 +7,15 @@
 //About (multipage)
 
 import React from 'react'
-import LetterInput from "./components/LetterInput"
-import Login from "./components/Login"
-import Leaderboard from "./components/Leaderboard"
+import MainContainer from "./components/MainContainer"
+import './App.css';
 
 const App = () => {
 
   return(
     <div style={{textAlign: 'center'}}>
       <h1>alphatype</h1>
-      <LetterInput/>
-      <Leaderboard/>
-      <Login/>
+      <MainContainer/>
     </div>
   )
 } 
