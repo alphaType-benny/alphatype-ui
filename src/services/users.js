@@ -13,6 +13,6 @@ const postResult = (body) => {
     return request.then(response => (response.data))
 }
 
-const resultService = {getAll, postResult}
+const usersService = {getAll, postResult}
   
-export default resultService
+export default usersService
