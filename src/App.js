@@ -1,8 +1,5 @@
 
-//Add timer on keypress
-//Stop timer when z is pressed
-//Login page (username)
-//Top 5 highscore players
+//User's recent scores
 //Style page
 //About (multipage)
 

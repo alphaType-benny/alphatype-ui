@@ -1,13 +1,14 @@
 
 import React, {useState} from "react"
 import Timer from "./Timer"
+import resultsService from "../services/results"
 
 var timerInterval
 
-const LetterInput = () =>{
+const LetterInput = ({setTotalTime, localScore, setLocalScore}) =>{
     const [start, setStart] = useState("")
     const [now, setNow] = useState("")
-    const [totalTime, setTotalTime] = useState("")
+    
     const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
   
     const spellCheck = (idx, letter, value) =>{
@@ -20,14 +21,16 @@ const LetterInput = () =>{
         timerInterval = setInterval(() => {
           let varNow = Date.now()
           setNow(varNow)
-          console.log(now);
-        }, 1);
+        }, 100);
       }
 
       if (value === letter) {
-        if(letter === "z"){
+        if(letter === "b"){
+          const score = (now-start)/1000
           clearInterval(timerInterval)
-          setTotalTime((now-start)/1000)
+          setLocalScore(score)
+          resultsService.saveScore(score)
+            .then(res => setTotalTime(score))
         }
         if(letter!=="z"){
           document.getElementById(idx+1).removeAttribute("disabled")
@@ -36,20 +39,32 @@ const LetterInput = () =>{
       }
     }
   
+    const restart = () => {
+      alphabet.map((a, idx) => {
+        const disabled = idx !== 0 ? "disabled" : ""
+        document.getElementById(idx).disabled = disabled
+        document.getElementById(idx).value = ""
+      })
+      setStart("")
+      setNow("")
+      setLocalScore("")
+      setTotalTime("")
+    }
+
     return(
       <div>
         <br/>
         <Timer
           now={now}
           start={start}
-          totalTime={totalTime}
+          localScore = {localScore}
         />
         <div>
             {alphabet.map( (a, idx) => {
             return (
                 <span key={idx}>
                 {idx===13?<br/>:""}
-                <label> {a} </label>
+                <label><b> &nbsp;{a}&nbsp; </b></label>
                 <input
                     disabled={idx !== 0 ? "disabled" : ""}
                     type="text"
@@ -63,6 +78,8 @@ const LetterInput = () =>{
             )
             })}
         </div>
+        <br/>
+        <button onClick={()=>restart()}>Restart</button>
         <br/>
       </div>
     )

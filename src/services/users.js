@@ -8,11 +8,11 @@ const getAll = async () => {
     return (response.data)
 }
 
-const postResult = (body) => {
+const signUp = (body) => {
     const request = axios.post(baseUrl, body)
     return request.then(response => (response.data))
 }
 
-const usersService = {getAll, postResult}
+const usersService = {getAll, signUp}
   
 export default usersService

@@ -1,6 +1,6 @@
-import resultsService from "../services/results";
-import usersService from "../services/users";
+
 import React, {useState, useEffect} from "react"
+import usersService from "../services/users";
 
 const sortResults = (scores) => {  
     return (scores.sort((b, a) => {
@@ -8,33 +8,35 @@ const sortResults = (scores) => {
     }))
 }
 
-const Leaderboard =  () => {
-    // const [topScores,setTopScores] = useState([])
+const Leaderboard =  ({totalTime}) => {
     const [users,setUsers] = useState([])
+    const [topPlayers,setTopPlayers] = useState([])
     let usersTopScore = []
-    let topPlayers = []
 
     useEffect(()=>{
-        // resultsService.allResults()
-        //     .then(res => setTopScores(sortResults(res)))
-
         usersService.getAll()
-            .then(res => setUsers(res))
-    },[])
-
-
-    if(users.length!==0){
-        users.map(u => {
+            .then(res => {
+                console.log("res", res);
+                setUsers(res)})
             
-            //need to be more efficient
-            const userScore = sortResults(u.results)[0].totalTime
-            const userData = {"username": u.username, "totalTime": userScore }
+    },[totalTime])
 
-            usersTopScore = usersTopScore.concat(userData)
-        })
 
-        topPlayers = sortResults(usersTopScore).slice(0,3)
-    }
+    useEffect(()=>{
+        if(users.length!==0){
+            users.map(u => {
+                let userScore = "No Score"
+                if(u.results.length !== 0){
+                    //need to be more efficient
+                    userScore = sortResults(u.results)[0].totalTime
+                    const userData = {"username": u.username, "totalTime": userScore }
+                    usersTopScore = usersTopScore.concat(userData)
+                }
+            })
+
+            setTopPlayers(sortResults(usersTopScore).slice(0,5))
+        }
+    }, [users])
 
     return(
         <div>
@@ -42,7 +44,7 @@ const Leaderboard =  () => {
             <div>
                 {topPlayers.map((p, idx) => {
                     return(
-                        <div>
+                        <div key={idx}>
                             <span>{idx+1}- {p.username} </span>
                             <span>{p.totalTime}s</span>
                         </div>
@@ -51,7 +53,6 @@ const Leaderboard =  () => {
             </div>
         </div>
     )
-
 }
 
 export default Leaderboard
