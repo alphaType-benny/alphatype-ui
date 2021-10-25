@@ -41,7 +41,7 @@
   display: grid;
   border: 1px black solid;
   padding: 50px 10px;
-  grid-template-columns: repeat(2fr, 3fr, 2fr);
+  grid-template-columns: repeat(1fr, 600px, 1fr);
   grid-template-rows: repeat(2, auto);
 }
 
@@ -63,4 +63,14 @@
 .timer {
   text-align: center;
   
+}
+
+.letterInput {
+  display: grid;
+  
+}
+
+.letter{
+  justify-self: center;
+  text-align: justify;
 }

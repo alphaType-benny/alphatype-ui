@@ -34,12 +34,14 @@ const Login = ({setUser}) =>{
           } catch (exception) {
             // setErrorMessage('Wrong Credentials')
             setTimeout(() => {
-            //   setErrorMessage(null)
+            // setErrorMessage(null)
             }, 5000)
           }
     }
 
-    const title = newUser === false ? "Login" : "Sign up"
+    const inputTitle = newUser === false ? "Login" : "Sign Up"
+    const promptText = newUser === false ? "New User?" : "Existing User?"
+    const promptOption = newUser !== false ? "Login" : "Sign Up"
 
     const switchInput = () => {
         setNewUser(!newUser)
@@ -49,7 +51,7 @@ const Login = ({setUser}) =>{
         <div>
             <br/>
             <form onSubmit={handleLogin}>
-                <h3>{title}</h3>
+                <h3>{inputTitle}</h3>
                 <div>
                 Username: 
                     <input
@@ -74,7 +76,7 @@ const Login = ({setUser}) =>{
             </form>
             <br/>
             <div>
-                New user? <button onClick={switchInput}>Sign Up</button>
+                {promptText} <button onClick={switchInput}>{promptOption}</button>
             </div>
         </div>
     )

@@ -36,6 +36,7 @@ const MainContainer = () => {
             </div>
             <div className="ctr-display">
                 <LetterInput
+                    totalTime = {totalTime}
                     setTotalTime = {setTotalTime}
                     localScore = {localScore}
                     setLocalScore = {setLocalScore}

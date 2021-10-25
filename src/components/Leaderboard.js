@@ -15,9 +15,7 @@ const Leaderboard =  ({totalTime}) => {
 
     useEffect(()=>{
         usersService.getAll()
-            .then(res => {
-                console.log("res", res);
-                setUsers(res)})
+            .then(res => setUsers(res))
             
     },[totalTime])
 

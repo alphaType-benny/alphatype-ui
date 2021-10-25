@@ -2,7 +2,7 @@
 import React from "react"
 //import usersService from "../services/users";
 
-const RecentGames = ({user, setUser}) => {
+const UserCard = ({user, setUser}) => {
 
     const logout = () => {
         setUser(null)
@@ -18,4 +18,4 @@ const RecentGames = ({user, setUser}) => {
     )
 }
 
-export default RecentGames
+export default UserCard

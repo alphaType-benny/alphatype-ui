@@ -19,8 +19,9 @@ const saveScore = async (score) => {
         headers: { Authorization: token },
     }
 
-    const scoreString = JSON.stringify(score)
-    const response = await axios.post(baseUrl, {scoreString}, config)
+    // const scoreString = JSON.stringify(score)
+    
+    const response = await axios.post(baseUrl, {score}, config)
     
     return response.data
 }

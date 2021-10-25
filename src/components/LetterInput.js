@@ -5,13 +5,14 @@ import resultsService from "../services/results"
 
 var timerInterval
 
-const LetterInput = ({setTotalTime, localScore, setLocalScore}) =>{
+const LetterInput = ({totalTime, setTotalTime, localScore, setLocalScore}) =>{
     const [start, setStart] = useState("")
     const [now, setNow] = useState("")
     
-    const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+      'n','o','p','q','r','s','t','u','v','w','x','y','z']
   
-    const spellCheck = (idx, letter, value) =>{
+    const spellCheck = async (idx, letter, value) =>{
   
       if (!start){
         setStart(Date.now())
@@ -25,12 +26,12 @@ const LetterInput = ({setTotalTime, localScore, setLocalScore}) =>{
       }
 
       if (value === letter) {
-        if(letter === "b"){
+        if(letter === "z"){
           const score = (now-start)/1000
           clearInterval(timerInterval)
-          setLocalScore(score)
-          resultsService.saveScore(score)
-            .then(res => setTotalTime(score))
+          await setLocalScore(score)
+          await resultsService.saveScore(score)
+          setTotalTime(score)
         }
         if(letter!=="z"){
           document.getElementById(idx+1).removeAttribute("disabled")
@@ -53,30 +54,33 @@ const LetterInput = ({setTotalTime, localScore, setLocalScore}) =>{
 
     return(
       <div>
-        <br/>
         <Timer
           now={now}
           start={start}
           localScore = {localScore}
+          totalTime = {totalTime}
         />
-        <div>
-            {alphabet.map( (a, idx) => {
-            return (
-                <span key={idx}>
-                {idx===13?<br/>:""}
-                <label><b> &nbsp;{a}&nbsp; </b></label>
-                <input
-                    disabled={idx !== 0 ? "disabled" : ""}
-                    type="text"
-                    id={idx}
-                    maxLength="1"
-                    onChange={(e)=>spellCheck(idx, a, e.target.value)}
-                    style={{width: "20px"}}
-                    autoComplete="off"
-                />
-                </span>
-            )
-            })}
+        <br/>
+        <div className="letterInput">
+            <div className="letter">
+              {alphabet.map( (a, idx) => {
+              return (
+                  <span key={idx}>
+                  {idx===13?<br/>:""}
+                  <label><b> &nbsp;{a}&nbsp; </b></label>
+                  <input
+                      disabled={idx !== 0 ? "disabled" : ""}
+                      type="text"
+                      id={idx}
+                      maxLength="1"
+                      onChange={(e)=>spellCheck(idx, a, e.target.value)}
+                      style={{width: "20px"}}
+                      autoComplete="off"
+                  />
+                  </span>
+              )
+              })}
+            </div>
         </div>
         <br/>
         <button onClick={()=>restart()}>Restart</button>
