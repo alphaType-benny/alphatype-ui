@@ -20,6 +20,11 @@ const MainContainer = () => {
         }
     }, [])
 
+    const logout = () => {
+        setUser(null)
+        return window.localStorage.removeItem('loggedAppUser')
+    }
+
     return(
         <div className = "container">
             <div className="left-display">
@@ -27,7 +32,7 @@ const MainContainer = () => {
                 user ?
                 <UserCard
                     user = {user}
-                    setUser = {setUser}
+                    logout = {logout}
                 />:
                 <Login
                     setUser = {setUser}
@@ -36,6 +41,7 @@ const MainContainer = () => {
             </div>
             <div className="ctr-display">
                 <LetterInput
+                    user = {user}
                     totalTime = {totalTime}
                     setTotalTime = {setTotalTime}
                     localScore = {localScore}

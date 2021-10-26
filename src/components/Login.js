@@ -53,25 +53,27 @@ const Login = ({setUser}) =>{
             <form onSubmit={handleLogin}>
                 <h3>{inputTitle}</h3>
                 <div>
-                Username: 
+                Username:&nbsp;
                     <input
                     type="text"
                     value={username}
                     name="Username"
+                    size="12"
                     onChange={({ target }) => setUsername(target.value)}
                 />
                 </div>
                 <div>
-                Password: 
+                Password:&nbsp;
                     <input
                     type="password"
                     value={password}
                     name="Password"
+                    size="12"
                     onChange={({ target }) => setPassword(target.value)}
                 />
                 </div>
                 <br/>
-                <button type="submit">submit</button>
+                <button type="submit">Submit</button>
                 
             </form>
             <br/>

@@ -2,12 +2,7 @@
 import React from "react"
 //import usersService from "../services/users";
 
-const UserCard = ({user, setUser}) => {
-
-    const logout = () => {
-        setUser(null)
-        return window.localStorage.removeItem('loggedAppUser')
-    }
+const UserCard = ({user, logout}) => {
 
     return(
         <div>
