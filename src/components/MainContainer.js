@@ -5,6 +5,7 @@ import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
+import Notification from "./Notification"
 
 const MainContainer = () => {
     const [user, setUser] = useState("")

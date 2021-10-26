@@ -1,6 +1,6 @@
 
 //Style page
-//About (multipage)
+//Multi-view (i.e. About Page)
 //User card -> stats (i.e. # games played, recent scores)
 //Add date/time data to each game
 //Notifications

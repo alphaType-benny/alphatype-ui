@@ -8,6 +8,7 @@ var timerInterval
 const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore}) =>{
   const [start, setStart] = useState("")
   const [now, setNow] = useState("")
+  const [background, setBackground] = useState("")
   
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -40,6 +41,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     }
 
     if (value === letter) {
+      setBackground(null)
       if(letter === "z"){
         const score = (now-start)/1000
         clearInterval(timerInterval)
@@ -52,14 +54,20 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         document.getElementById(idx+1).focus()
       }
     }
+
+    if(value !== letter){
+      setBackground("red")
+    }
   }
 
   const restart = () => {
+
     alphabet.map((a, idx) => {
       const disabled = idx !== 0 ? "disabled" : ""
       document.getElementById(idx).disabled = disabled
       document.getElementById(idx).value = ""
     })
+
     setStart("")
     setNow("")
     setLocalScore("")
@@ -70,7 +78,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   }
 
   return(
-    <div>
+    <div style={{backgroundColor:background}}>
       <Timer
         now={now}
         start={start}
