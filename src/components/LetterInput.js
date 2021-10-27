@@ -86,6 +86,30 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     document.removeEventListener('keyup', escKey)
   }
 
+  const inputField = (alpha) => {
+    
+    return(
+      <div className="letter">
+        {alpha.map(a => {
+          return (
+              <span key={a.idx}>
+              <label><b> &nbsp;{a.a}&nbsp; </b></label>
+              <input
+                  disabled={a.idx !== 0 ? "disabled" : ""}
+                  type="text"
+                  id={a.idx}
+                  maxLength="1"
+                  onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
+                  style={{width: "20px"}}
+                  autoComplete="off"
+              />
+              </span>
+          )
+        })}
+      </div>
+    )
+  }
+
   return(
     <div style={{backgroundColor:background}}>
       <Timer
@@ -95,46 +119,9 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         totalTime = {totalTime}
       />
       <br/>
-        <div className="letterInput">
-          <br/>
-          <div className="letter">
-          {alphaRow1.map(a => {
-            return (
-                <span key={a.idx}>
-                <label><b> &nbsp;{a.a}&nbsp; </b></label>
-                <input
-                    disabled={a.idx !== 0 ? "disabled" : ""}
-                    type="text"
-                    id={a.idx}
-                    maxLength="1"
-                    onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
-                    style={{width: "20px"}}
-                    autoComplete="off"
-                />
-                </span>
-            )
-          })}
-          </div>
-          <br/>
-          <div className="letter">
-            {alphaRow2.map(a => {
-              return (
-                  <span key={a.idx}>
-                  <label><b> &nbsp;{a.a}&nbsp; </b></label>
-                  <input
-                      disabled={a.idx !== 0 ? "disabled" : ""}
-                      type="text"
-                      id={a.idx}
-                      maxLength="1"
-                      onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
-                      style={{width: "20px"}}
-                      autoComplete="off"
-                  />
-                  </span>
-              )
-            })}
-          </div>
-      </div>
+      {inputField(alphaRow1)}
+      <br/>
+      {inputField(alphaRow2)}
       <br/>
       <button onClick={()=>restart()}>Restart (ESC Key)</button>
       <br/>
