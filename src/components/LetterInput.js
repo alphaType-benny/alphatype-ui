@@ -13,9 +13,13 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-  useEffect(()=> {
-    restart()
-  }, [user])
+  let alphaWithIdx = []
+  alphabet.map((a,idx)=>{alphaWithIdx=alphaWithIdx.concat({a,idx})})
+
+  const alphaRow1 = alphaWithIdx.slice(0,13)
+  const alphaRow2 = alphaWithIdx.slice(13)
+
+  useEffect(() => {restart()}, [user])
 
   const escKey = (e) => {
     e.preventDefault()
@@ -25,7 +29,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     }
   }
 
-  const spellCheck = async (idx, letter, value) =>{
+  const spellCheck = async (id, letter, value) =>{
 
     if (!start){
       setStart(Date.now())
@@ -41,7 +45,9 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     }
 
     if (value === letter) {
+
       setBackground(null)
+
       if(letter === "z"){
         const score = (now-start)/1000
         clearInterval(timerInterval)
@@ -49,9 +55,11 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         await resultsService.saveScore(score)
         setTotalTime(score)
       }
+
       if(letter!=="z"){
-        document.getElementById(idx+1).removeAttribute("disabled")
-        document.getElementById(idx+1).focus()
+        console.log("next triggered", id+1);
+        document.getElementById(id+1).removeAttribute("disabled")
+        document.getElementById(id+1).focus()
       }
     }
 
@@ -68,13 +76,38 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
       document.getElementById(idx).value = ""
     })
 
-    setStart("")
+    setStart("")  
     setNow("")
     setLocalScore("")
     setTotalTime("")
 
+    setBackground(null)
     document.getElementById(0).focus()
     document.removeEventListener('keyup', escKey)
+  }
+
+  const inputField = (alpha) => {
+    
+    return(
+      <div className="letter">
+        {alpha.map(a => {
+          return (
+              <span key={a.idx}>
+              <label><b> &nbsp;{a.a}&nbsp; </b></label>
+              <input
+                  disabled={a.idx !== 0 ? "disabled" : ""}
+                  type="text"
+                  id={a.idx}
+                  maxLength="1"
+                  onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
+                  style={{width: "20px"}}
+                  autoComplete="off"
+              />
+              </span>
+          )
+        })}
+      </div>
+    )
   }
 
   return(
@@ -86,27 +119,9 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         totalTime = {totalTime}
       />
       <br/>
-      <div className="letterInput">
-          <div className="letter">
-            {alphabet.map( (a, idx) => {
-            return (
-                <span key={idx}>
-                {idx===13?<br/>:""}
-                <label><b> &nbsp;{a}&nbsp; </b></label>
-                <input
-                    disabled={idx !== 0 ? "disabled" : ""}
-                    type="text"
-                    id={idx}
-                    maxLength="1"
-                    onChange={(e)=>spellCheck(idx, a, e.target.value)}
-                    style={{width: "20px"}}
-                    autoComplete="off"
-                />
-                </span>
-            )
-            })}
-          </div>
-      </div>
+      {inputField(alphaRow1)}
+      <br/>
+      {inputField(alphaRow2)}
       <br/>
       <button onClick={()=>restart()}>Restart (ESC Key)</button>
       <br/>
