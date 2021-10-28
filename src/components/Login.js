@@ -45,6 +45,8 @@ const Login = ({setUser}) =>{
 
     const switchInput = () => {
         setNewUser(!newUser)
+        setUsername('')
+        setPassword('')
     }
 
     return (
@@ -52,7 +54,7 @@ const Login = ({setUser}) =>{
             <div className="ctr-display">
                 <form onSubmit={handleLogin}>
                     <h3>{inputTitle}</h3>
-                    <div>
+                    <div className="loginField">
                     Username:&nbsp;
                         <input
                         type="text"
@@ -62,7 +64,7 @@ const Login = ({setUser}) =>{
                         onChange={({ target }) => setUsername(target.value)}
                     />
                     </div>
-                    <div>
+                    <div className="loginField">
                     Password:&nbsp;
                         <input
                         type="password"

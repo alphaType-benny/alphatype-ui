@@ -121,6 +121,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         start={start}
         localScore = {localScore}
         totalTime = {totalTime}
+        
       />
       <br/>
       {inputField(alphaRow1)}

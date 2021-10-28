@@ -14,7 +14,7 @@ const App = () => {
 
   return(
     <div style={{textAlign: 'center'}}>
-      <h1>alphatype</h1>
+      <h1 className="gameTitle">alphaType</h1>
       <MainContainer/>
     </div>
   )

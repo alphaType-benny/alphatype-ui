@@ -39,19 +39,20 @@
 
 .mainContainer {
   display: grid;
-  border: 1px black solid;
+  border-top: 1px black solid;
   padding: 50px 10px;
-  grid-template-columns: repeat(1fr, 600px, 1fr);
-  grid-template-rows: repeat(2, auto);
-  justify-items: center;
+  grid-template-columns: 1fr 500px 1fr;
+  grid-template-rows: 2, auto;
+  justify-items: stretch;
+  font-family: 'Krub', sans-serif;
 }
 
 .loginContainer {
   display: grid;
-  border: 1px black solid;
+  border-top: 1px black solid;
   padding: 50px 10px;
-  grid-template-columns: repeat(1fr, 600px, 1fr);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 1fr 600px 1fr;
+  grid-template-rows: 2, auto;
   justify-items: center;
   justify-content: center;  
 }
@@ -60,16 +61,15 @@
   border: 1px black solid;
   grid-column: 2/3;
   grid-row: 1/2;
+  padding: 0 50px;
 }
 
 .left-display {
-  border: 1px black solid;
   grid-column: 1/2;
   grid-row: 1/2;
 }
 
 .right-display {
-  border: 1px black solid;
   grid-column: 3/4;
   grid-row: 1/2;
 }
@@ -81,5 +81,15 @@
 
 .letter{
   display: flex;
+  justify-content: space-between;
+}
+
+.gameTitle{
+  font-family: 'Press Start 2P', cursive;
+  padding-top: 20px;
+}
+
+.loginField{
+  display:flex;
   justify-content: space-between;
 }
