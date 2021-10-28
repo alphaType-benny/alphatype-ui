@@ -1,4 +1,5 @@
 
+//Prevent same username to be used
 //Multi-view (i.e. About Page)
 //letter above input field?
 //User card -> stats (i.e. # games played, recent scores)

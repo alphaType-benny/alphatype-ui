@@ -13,7 +13,6 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   const [now, setNow] = useState("")
   const [background, setBackground] = useState("")
   
-  
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
 
@@ -51,24 +50,28 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     if (value === letter) {
       totalMatch += 1 
       setBackground(null)
-      console.log(totalMatch, alphabet.length);
 
       if(letter === "z" && totalMatch === alphabet.length){
         const score = (now-start)/1000
+        let localDate = new Date()
         clearInterval(timerInterval)
         await setLocalScore(score)
         await resultsService.saveScore(score)
         setTotalTime(score)
+        console.log(localDate);
       }
       else{
         document.getElementById(id+1).removeAttribute("disabled")
         document.getElementById(id+1).focus()
       }
     }
-
-    if(value !== letter){
+    else{
       setBackground("red")
     }
+
+    // if(value !== letter){
+    //   setBackground("red")
+    // }
   }
 
   const restart = () => {

@@ -1,6 +1,5 @@
 
 import React, {useState, useEffect} from "react"
-import usersService from "../services/users";
 
 const sortResults = (scores) => {  
     return (scores.sort((b, a) => {
@@ -8,33 +7,25 @@ const sortResults = (scores) => {
     }))
 }
 
-const Leaderboard =  ({totalTime}) => {
-    const [users,setUsers] = useState([])
-    const [topPlayers,setTopPlayers] = useState([])
-    let usersTopScore = []
+const Leaderboard =  ({totalTime, topPlayers, setTopPlayers, allUsers}) => {
+      
+  let usersTopScore = []
 
-    useEffect(()=>{
-        usersService.getAll()
-            .then(res => setUsers(res))
-            
-    },[totalTime])
-
-
-    useEffect(()=>{
-        if(users.length!==0){
-            users.map(u => {
-                let userScore = "No Score"
-                if(u.results.length !== 0){
-                    //need to be more efficient
-                    userScore = sortResults(u.results)[0].totalTime
-                    const userData = {"username": u.username, "totalTime": userScore }
-                    usersTopScore = usersTopScore.concat(userData)
-                }
-            })
-
-            setTopPlayers(sortResults(usersTopScore).slice(0,5))
+  useEffect(() => {
+    if(allUsers.length!==0){
+      allUsers.map(u => {
+        let userScore = "No Score"
+        if(u.results.length !== 0){
+            //need to be more efficient
+            userScore = sortResults(u.results)[0].totalTime
+            const userData = {"username": u.username, "totalTime": userScore }
+            usersTopScore = usersTopScore.concat(userData)
         }
-    }, [users])
+      })
+
+      setTopPlayers(sortResults(usersTopScore).slice(0,5))
+    }
+  }, [allUsers])
 
     return(
         <div>

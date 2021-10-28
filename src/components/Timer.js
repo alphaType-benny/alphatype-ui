@@ -9,7 +9,7 @@ const Timer = ({start, now, localScore, totalTime}) => {
     else if (!localScore){
       return <h3><b>Timer:</b> {liveScore.toFixed(3)}s</h3>
     }
-    return <h3><b>Your alphatime is:</b> {localScore}s !</h3>
+    return <h3><b>Your alphaTime is:</b> {localScore}s !</h3>
   }
   
   return(

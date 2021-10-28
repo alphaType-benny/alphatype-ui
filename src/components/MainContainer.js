@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from "react"
 import resultsService from "../services/results"
+import usersService from "../services/users";
 import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
@@ -9,9 +10,11 @@ import Notification from "./Notification"
 
 const MainContainer = () => {
     const [user, setUser] = useState("")
+    const [allUsers, setAllUsers] = useState([])
+    const [topPlayers,setTopPlayers] = useState([])
     const [totalTime, setTotalTime] = useState("")
     const [localScore, setLocalScore] = useState("")
-
+    
     useEffect(() => {
         const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
         if (loggedUserJSON) {
@@ -20,6 +23,11 @@ const MainContainer = () => {
           resultsService.setToken(user.token)
         }
     }, [])
+
+    useEffect(()=>{
+        usersService.getAll()
+          .then(res => setAllUsers(res))
+      },[totalTime])
 
     const logout = () => {
         setUser(null)
@@ -32,6 +40,8 @@ const MainContainer = () => {
             <div className="left-display">
                 <UserCard
                     user = {user}
+                    allUsers = {allUsers}
+                    topPlayers = {topPlayers}
                     logout = {logout}
                 />
             </div>
@@ -47,6 +57,9 @@ const MainContainer = () => {
             <div className = "right-display">
                 <Leaderboard
                     totalTime = {totalTime}
+                    topPlayers = {topPlayers}
+                    setTopPlayers = {setTopPlayers}
+                    allUsers = {allUsers}
                 />
             </div>
         </div>
