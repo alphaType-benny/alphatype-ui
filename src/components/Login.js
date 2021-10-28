@@ -48,37 +48,38 @@ const Login = ({setUser}) =>{
     }
 
     return (
-        <div>
-            <br/>
-            <form onSubmit={handleLogin}>
-                <h3>{inputTitle}</h3>
-                <div>
-                Username:&nbsp;
-                    <input
-                    type="text"
-                    value={username}
-                    name="Username"
-                    size="12"
-                    onChange={({ target }) => setUsername(target.value)}
-                />
-                </div>
-                <div>
-                Password:&nbsp;
-                    <input
-                    type="password"
-                    value={password}
-                    name="Password"
-                    size="12"
-                    onChange={({ target }) => setPassword(target.value)}
-                />
-                </div>
-                <br/>
-                <button type="submit">Submit</button>
+        <div className="loginContainer">
+            <div className="ctr-display">
+                <form onSubmit={handleLogin}>
+                    <h3>{inputTitle}</h3>
+                    <div>
+                    Username:&nbsp;
+                        <input
+                        type="text"
+                        value={username}
+                        name="Username"
+                        size="12"
+                        onChange={({ target }) => setUsername(target.value)}
+                    />
+                    </div>
+                    <div>
+                    Password:&nbsp;
+                        <input
+                        type="password"
+                        value={password}
+                        name="Password"
+                        size="12"
+                        onChange={({ target }) => setPassword(target.value)}
+                    />
+                    </div>
+                    <br/>
+                    <button type="submit">Submit</button>
                 
-            </form>
-            <br/>
-            <div>
-                {promptText} <button onClick={switchInput}>{promptOption}</button>
+                </form>
+                <br/>
+                <div>
+                    {promptText} <button onClick={switchInput}>{promptOption}</button>
+                </div>
             </div>
         </div>
     )

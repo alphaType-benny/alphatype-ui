@@ -3,12 +3,16 @@ import React, {useState, useEffect} from "react"
 import Timer from "./Timer"
 import resultsService from "../services/results"
 
-var timerInterval
+let timerInterval
+
+//Prevent user from DOM manipulating and cheating
+let totalMatch = 0
 
 const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore}) =>{
   const [start, setStart] = useState("")
   const [now, setNow] = useState("")
   const [background, setBackground] = useState("")
+  
   
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -45,19 +49,18 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     }
 
     if (value === letter) {
-
+      totalMatch += 1 
       setBackground(null)
+      console.log(totalMatch, alphabet.length);
 
-      if(letter === "z"){
+      if(letter === "z" && totalMatch === alphabet.length){
         const score = (now-start)/1000
         clearInterval(timerInterval)
         await setLocalScore(score)
         await resultsService.saveScore(score)
         setTotalTime(score)
       }
-
-      if(letter!=="z"){
-        console.log("next triggered", id+1);
+      else{
         document.getElementById(id+1).removeAttribute("disabled")
         document.getElementById(id+1).focus()
       }
@@ -70,13 +73,14 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
 
   const restart = () => {
 
-    alphabet.map((a, idx) => {
+    for(let idx=0; idx<alphabet.length; idx++){
       const disabled = idx !== 0 ? "disabled" : ""
       document.getElementById(idx).disabled = disabled
       document.getElementById(idx).value = ""
-    })
+    }
 
-    setStart("")  
+    totalMatch = 0
+    setStart("")
     setNow("")
     setLocalScore("")
     setTotalTime("")
