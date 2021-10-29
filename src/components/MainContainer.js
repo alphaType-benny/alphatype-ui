@@ -2,11 +2,11 @@
 import React, {useState, useEffect} from "react"
 import resultsService from "../services/results"
 import usersService from "../services/users";
+import Notification from "./Notification"
 import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
-import Notification from "./Notification"
 
 const MainContainer = () => {
     const [user, setUser] = useState("")
@@ -14,6 +14,8 @@ const MainContainer = () => {
     const [topPlayers,setTopPlayers] = useState([])
     const [totalTime, setTotalTime] = useState("")
     const [localScore, setLocalScore] = useState("")
+    const [notifClass, setNotifClass] = useState('')
+    const [notifMessage, setNotifMessage] = useState('')
     
     useEffect(() => {
         const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
@@ -27,7 +29,15 @@ const MainContainer = () => {
     useEffect(()=>{
         usersService.getAll()
           .then(res => setAllUsers(res))
-      },[totalTime])
+    },[totalTime])
+
+    const notification = (notifClass, notifMessage) => {
+        setNotifClass(notifClass)
+        setNotifMessage(notifMessage)
+        setTimeout(() => {
+            setNotifMessage(null)
+        }, 5000)
+    }
 
     const logout = () => {
         setUser(null)
@@ -66,16 +76,28 @@ const MainContainer = () => {
         )
     }
 
+    const fade = false
+
     return(
         <div>
-        {
-            user ?
-            loggedInDisplay()
-            :
-            <Login
-              setUser = {setUser}
-            />
-        }
+            
+                <div className="notifFlex">
+                    <Notification
+                        notifClass={notifClass}
+                        notifMessage={notifMessage}
+                    />
+                </div>
+                
+                {
+                    user ?
+                    loggedInDisplay()
+                    :
+                    <Login
+                    setUser = {setUser}
+                    notification={notification}
+                    />
+                }
+            
         </div>
     )
 }

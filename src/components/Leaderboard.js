@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 
 const sortResults = (scores) => {  
     return (scores.sort((b, a) => {
@@ -7,7 +7,7 @@ const sortResults = (scores) => {
     }))
 }
 
-const Leaderboard =  ({totalTime, topPlayers, setTopPlayers, allUsers}) => {
+const Leaderboard =  ({topPlayers, setTopPlayers, allUsers}) => {
       
   let usersTopScore = []
 
@@ -16,7 +16,6 @@ const Leaderboard =  ({totalTime, topPlayers, setTopPlayers, allUsers}) => {
       allUsers.map(u => {
         let userScore = "No Score"
         if(u.results.length !== 0){
-            //need to be more efficient
             userScore = sortResults(u.results)[0].totalTime
             const userData = {"username": u.username, "totalTime": userScore }
             usersTopScore = usersTopScore.concat(userData)
@@ -27,25 +26,25 @@ const Leaderboard =  ({totalTime, topPlayers, setTopPlayers, allUsers}) => {
     }
   }, [allUsers])
 
-    return(
-        <div >
-            <h3>Leaderboard</h3>
-            <table className="leaderboard">
-                <tbody style={{textAlign: "left"}}>
-                    <th>User</th>
-                    <th>Time</th>
-                    {topPlayers.map((p, idx) => {
-                        return(
-                            <tr key={idx}>
-                                <td style={{minWidth: "100px"}}>{idx+1}- {p.username}&nbsp;</td>
-                                <td>{p.totalTime}s</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-        </div>
-    )
+  return(
+    <div >
+      <h3><u>Leaderboard</u></h3>
+      <table className="leaderboard">
+        <tbody style={{textAlign: "left"}}>
+          <th>User</th>
+          <th>Time</th>
+          {topPlayers.map((p, idx) => {
+            return(
+              <tr key={idx}>
+                <td style={{minWidth: "100px"}}>{idx+1}- {p.username}&nbsp;</td>
+                <td>{p.totalTime}s</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 export default Leaderboard

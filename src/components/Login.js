@@ -3,8 +3,9 @@ import React, {useState} from 'react'
 import loginService from "../services/login"
 import resultsService from "../services/results"
 import usersService from "../services/users"
+import Button from 'react-bootstrap/Button';
 
-const Login = ({setUser}) =>{
+const Login = ({setUser, notification}) =>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [newUser, setNewUser] = useState(false)
@@ -13,7 +14,13 @@ const Login = ({setUser}) =>{
         event.preventDefault()
         
         if(newUser){
-            await usersService.signUp({username, password})
+            try {
+                await usersService.signUp({username, password})
+            }
+            catch (exception){
+                notification("danger", "Invalid Credentials")
+                return
+            }
         }
 
         try {
@@ -25,17 +32,13 @@ const Login = ({setUser}) =>{
                 'loggedAppUser', JSON.stringify(user)
             )
 
-            console.log(user);
             resultsService.setToken(user.token)
-            
             setUsername('')
             setPassword('')
             setUser(user)
+            notification("success", `Welcome ${user.username} & Happy alphaTyping!`)
           } catch (exception) {
-            // setErrorMessage('Wrong Credentials')
-            setTimeout(() => {
-            // setErrorMessage(null)
-            }, 5000)
+            notification("danger", "Wrong/Invalid Credentials")
           }
     }
 
@@ -54,6 +57,7 @@ const Login = ({setUser}) =>{
             <div className="loginDisplay">
                 <form onSubmit={handleLogin}>
                     <h3>{inputTitle}</h3>
+                    <br/>
                     <div className="loginField">
                     Username:&nbsp;
                         <input
@@ -75,12 +79,13 @@ const Login = ({setUser}) =>{
                     />
                     </div>
                     <br/>
-                    <button type="submit">Submit</button>
+                    <Button variant="secondary" type="submit">Submit</Button>
                 
                 </form>
                 <br/>
-                <div>
-                    {promptText} <button onClick={switchInput}>{promptOption}</button>
+                <div className="toggleLoginSignUp">
+                    <div>{promptText}</div>
+                    <Button variant="link" style={{paddingTop: '0'}} onClick={switchInput}>{promptOption}</Button>
                 </div>
             </div>
         </div>

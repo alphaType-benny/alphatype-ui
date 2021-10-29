@@ -1,6 +1,7 @@
 
 import React from "react"
-//import usersService from "../services/users";
+import Button from 'react-bootstrap/Button';
+
 
 const UserCard = ({user, allUsers, topPlayers, logout}) => {
     
@@ -15,7 +16,6 @@ const UserCard = ({user, allUsers, topPlayers, logout}) => {
             rank = 1 + topPlayers.findIndex(u=>u.username === user.username)
             personalBest = topPlayers.length === 0 ? null : userTopScore.totalTime
             gamesPlayed = userData.results.length
-            console.log(userData.results.length);
         }
     }
 
@@ -24,9 +24,9 @@ const UserCard = ({user, allUsers, topPlayers, logout}) => {
             <h3 style={{margin:0}}>Welcome, {user.username}</h3>
             <p>Ranking: {rank}</p>
             <table className="userStats">
-                <tbody>
+                <tbody style={{textAlign: "left"}}>
                     <tr>
-                        <td>Personal Best:</td>
+                        <td style={{minWidth: "120px"}}>Personal Best:</td>
                         <td>{personalBest}s</td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@ const UserCard = ({user, allUsers, topPlayers, logout}) => {
                 </tbody>
             </table>
             <br/>
-            <button onClick={()=>logout()}>Logout</button>
+            <Button variant="outline-secondary" size="sm" onClick={()=>logout()}>Logout</Button>
         </div>        
     )
 }

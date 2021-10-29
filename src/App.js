@@ -9,14 +9,16 @@
 
 import React from 'react'
 import MainContainer from "./components/MainContainer"
+import Footer from "./components/Footer"
 import './App.css';
 
 const App = () => {
 
   return(
-    <div style={{textAlign: 'center'}}>
+    <div className="App">
       <h1 className="gameTitle">alphaType</h1>
       <MainContainer/>
+      <Footer/>
     </div>
   )
 } 

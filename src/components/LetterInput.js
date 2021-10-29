@@ -2,16 +2,16 @@
 import React, {useState, useEffect} from "react"
 import Timer from "./Timer"
 import resultsService from "../services/results"
+import Button from 'react-bootstrap/Button';
 
 let timerInterval
 
 //Prevent user from DOM manipulating and cheating
 let totalMatch = 0
 
-const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore}) =>{
+const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
   const [start, setStart] = useState("")
   const [now, setNow] = useState("")
-  const [background, setBackground] = useState("")
   
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -22,7 +22,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   const alphaRow1 = alphaWithIdx.slice(0,13)
   const alphaRow2 = alphaWithIdx.slice(13)
 
-  useEffect(() => {restart()}, [user])
+  useEffect(() => restart(), [user])
 
   const escKey = (e) => {
     e.preventDefault()
@@ -92,7 +92,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   const inputField = (alpha) => {
     
     return(
-      <div className="letter">
+      <div className="letterInput">
         {alpha.map(a => {
           return (
               <span key={a.idx}>
@@ -119,14 +119,12 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         now={now}
         start={start}
         localScore = {localScore}
-        totalTime = {totalTime}
       />
       <br/>
       {inputField(alphaRow1)}
-      <br/>
       {inputField(alphaRow2)}
       <br/>
-        <button onClick={()=>restart()}>Restart (ESC Key)</button>
+      <Button variant="secondary" size="sm" onClick={()=>restart()}>Restart (ESC Key)</Button>
     </div>
   )
 }
