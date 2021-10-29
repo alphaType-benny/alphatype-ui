@@ -40,11 +40,34 @@
 .mainContainer {
   display: grid;
   border-top: 1px black solid;
-  padding: 50px 10px;
-  grid-template-columns: 1fr 500px 1fr;
+  padding: 20px 10px;
+  grid-template-columns: 1fr 500px  1fr;
   grid-template-rows: 2, auto;
-  justify-items: stretch;
+  column-gap: 60px;
+  justify-items: center;
+  justify-content: center;   
   font-family: 'Krub', sans-serif;
+}
+
+.ctr-display {
+  border: 1px black solid;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding: 20px 50px;
+}
+
+.left-display {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  padding-top: 30px;
+  justify-self: end;
+}
+
+.right-display {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  padding-top: 30px;
+  justify-self: start;
 }
 
 .loginContainer {
@@ -57,26 +80,20 @@
   justify-content: center;  
 }
 
-.ctr-display {
+.loginDisplay {
   border: 1px black solid;
   grid-column: 2/3;
   grid-row: 1/2;
-  padding: 0 50px;
+  padding: 25px 50px;
 }
 
-.left-display {
-  grid-column: 1/2;
-  grid-row: 1/2;
-}
-
-.right-display {
-  grid-column: 3/4;
-  grid-row: 1/2;
+.loginField{
+  display:flex;
+  justify-content: space-between;
 }
 
 .timer {
   text-align: center;
-  
 }
 
 .letter{
@@ -89,7 +106,12 @@
   padding-top: 20px;
 }
 
-.loginField{
-  display:flex;
-  justify-content: space-between;
+.userStats{
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboard{
+  display: flex;
+  justify-content: center;
 }

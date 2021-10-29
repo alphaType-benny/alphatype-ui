@@ -51,7 +51,7 @@ const Login = ({setUser}) =>{
 
     return (
         <div className="loginContainer">
-            <div className="ctr-display">
+            <div className="loginDisplay">
                 <form onSubmit={handleLogin}>
                     <h3>{inputTitle}</h3>
                     <div className="loginField">

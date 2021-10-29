@@ -4,7 +4,7 @@ const Timer = ({start, now, localScore, totalTime}) => {
 
   const timerState = () =>{
     if (!start){
-      return <h3>Game starts from first press!</h3>
+      return <h3>To start game, begin typing</h3>
     }
     else if (!localScore){
       return <h3><b>Timer:</b> {liveScore.toFixed(3)}s</h3>

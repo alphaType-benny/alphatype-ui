@@ -32,6 +32,8 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     }
   }
 
+  const changeBgColor = (color) => document.getElementsByClassName("ctr-display")[0].style.backgroundColor = color;
+
   const spellCheck = async (id, letter, value) =>{
 
     if (!start){
@@ -49,16 +51,14 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
 
     if (value === letter) {
       totalMatch += 1 
-      setBackground(null)
+      changeBgColor(null)
 
       if(letter === "z" && totalMatch === alphabet.length){
         const score = (now-start)/1000
-        let localDate = new Date()
         clearInterval(timerInterval)
         await setLocalScore(score)
         await resultsService.saveScore(score)
         setTotalTime(score)
-        console.log(localDate);
       }
       else{
         document.getElementById(id+1).removeAttribute("disabled")
@@ -66,12 +66,8 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
       }
     }
     else{
-      setBackground("red")
+      changeBgColor("red")
     }
-
-    // if(value !== letter){
-    //   setBackground("red")
-    // }
   }
 
   const restart = () => {
@@ -88,7 +84,7 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
     setLocalScore("")
     setTotalTime("")
 
-    setBackground(null)
+    changeBgColor(null)
     document.getElementById(0).focus()
     document.removeEventListener('keyup', escKey)
   }
@@ -100,14 +96,14 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
         {alpha.map(a => {
           return (
               <span key={a.idx}>
-              <label><b> &nbsp;{a.a}&nbsp; </b></label>
+              <label><b>&nbsp;{a.a}&nbsp;</b></label>
               <input
                   disabled={a.idx !== 0 ? "disabled" : ""}
                   type="text"
                   id={a.idx}
                   maxLength="1"
                   onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
-                  style={{width: "20px"}}
+                  style={{width: "20px", textAlign:"center"}}
                   autoComplete="off"
               />
               </span>
@@ -118,21 +114,19 @@ const LetterInput = ({user, totalTime, setTotalTime, localScore, setLocalScore})
   }
 
   return(
-    <div style={{backgroundColor:background}}>
+    <div>
       <Timer
         now={now}
         start={start}
         localScore = {localScore}
         totalTime = {totalTime}
-        
       />
       <br/>
       {inputField(alphaRow1)}
       <br/>
       {inputField(alphaRow2)}
       <br/>
-      <button onClick={()=>restart()}>Restart (ESC Key)</button>
-      <br/>
+        <button onClick={()=>restart()}>Restart (ESC Key)</button>
     </div>
   )
 }

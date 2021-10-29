@@ -28,18 +28,22 @@ const Leaderboard =  ({totalTime, topPlayers, setTopPlayers, allUsers}) => {
   }, [allUsers])
 
     return(
-        <div>
+        <div >
             <h3>Leaderboard</h3>
-            <div>
-                {topPlayers.map((p, idx) => {
-                    return(
-                        <div key={idx}>
-                            <span>{idx+1}- {p.username} </span>
-                            <span>{p.totalTime}s</span>
-                        </div>
-                    )
-                })}
-            </div>
+            <table className="leaderboard">
+                <tbody style={{textAlign: "left"}}>
+                    <th>User</th>
+                    <th>Time</th>
+                    {topPlayers.map((p, idx) => {
+                        return(
+                            <tr key={idx}>
+                                <td style={{minWidth: "100px"}}>{idx+1}- {p.username}&nbsp;</td>
+                                <td>{p.totalTime}s</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
     )
 }
