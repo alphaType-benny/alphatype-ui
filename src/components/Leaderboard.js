@@ -7,33 +7,37 @@ const sortResults = (scores) => {
     }))
 }
 
-const Leaderboard =  ({topPlayers, setTopPlayers, allUsers}) => {
-      
-  let usersTopScore = []
+const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
 
   useEffect(() => {
+    let topScores = []
+
     if(allUsers.length!==0){
-      allUsers.map(u => {
+      allUsers.forEach(u => {
         let userScore = "No Score"
         if(u.results.length !== 0){
             userScore = sortResults(u.results)[0].totalTime
             const userData = {"username": u.username, "totalTime": userScore }
-            usersTopScore = usersTopScore.concat(userData)
+            topScores = topScores.concat(userData)
         }
       })
-
-      setTopPlayers(sortResults(usersTopScore).slice(0,5))
+      console.log(topScores);
+      setUsersTopScore(sortResults(topScores))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUsers])
 
   return(
     <div >
       <h3><u>Leaderboard</u></h3>
       <table className="leaderboard">
-        <tbody style={{textAlign: "left"}}>
-          <th>User</th>
-          <th>Time</th>
-          {topPlayers.map((p, idx) => {
+      <tbody style={{textAlign: "left"}}>
+          <tr>
+            <th>User</th>
+            <th>Time</th>
+          </tr>
+          
+          {(usersTopScore.slice(0,5)).map((p, idx) => {
             return(
               <tr key={idx}>
                 <td style={{minWidth: "100px"}}>{idx+1}- {p.username}&nbsp;</td>

@@ -8,10 +8,10 @@ import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
 
-const MainContainer = () => {
-    const [user, setUser] = useState("")
+const MainContainer = ({user, setUser}) => {
+    
     const [allUsers, setAllUsers] = useState([])
-    const [topPlayers,setTopPlayers] = useState([])
+    const [usersTopScore, setUsersTopScore ] = useState([])
     const [totalTime, setTotalTime] = useState("")
     const [localScore, setLocalScore] = useState("")
     const [notifClass, setNotifClass] = useState('')
@@ -51,7 +51,7 @@ const MainContainer = () => {
                 <UserCard
                     user = {user}
                     allUsers = {allUsers}
-                    topPlayers = {topPlayers}
+                    usersTopScore = {usersTopScore}
                     logout = {logout}
                 />
             </div>
@@ -67,8 +67,8 @@ const MainContainer = () => {
             <div className = "right-display">
                 <Leaderboard
                     totalTime = {totalTime}
-                    topPlayers = {topPlayers}
-                    setTopPlayers = {setTopPlayers}
+                    usersTopScore = {usersTopScore}
+                    setUsersTopScore = {setUsersTopScore}
                     allUsers = {allUsers}
                 />
             </div>
@@ -76,11 +76,8 @@ const MainContainer = () => {
         )
     }
 
-    const fade = false
-
     return(
         <div>
-            
                 <div className="notifFlex">
                     <Notification
                         notifClass={notifClass}
@@ -93,8 +90,9 @@ const MainContainer = () => {
                     loggedInDisplay()
                     :
                     <Login
-                    setUser = {setUser}
-                    notification={notification}
+                        user={user}
+                        setUser = {setUser}
+                        notification={notification}
                     />
                 }
             

@@ -24,13 +24,9 @@ const Login = ({setUser, notification}) =>{
         }
 
         try {
-            const user = await loginService.userLogin({
-              username, password
-            })
-
-            window.localStorage.setItem(
-                'loggedAppUser', JSON.stringify(user)
-            )
+            const user = await loginService.userLogin({username, password})
+            console.log(user);
+            window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
 
             resultsService.setToken(user.token)
             setUsername('')
@@ -42,7 +38,7 @@ const Login = ({setUser, notification}) =>{
           }
     }
 
-    const inputTitle = newUser === false ? "Login" : "Sign Up"
+    const inputTitle = newUser === false ? "Login to Play" : "Create Account"
     const promptText = newUser === false ? "New User?" : "Existing User?"
     const promptOption = newUser !== false ? "Login" : "Sign Up"
 

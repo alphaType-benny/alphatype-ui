@@ -17,12 +17,15 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
 
   let alphaWithIdx = []
-  alphabet.map((a,idx)=>{alphaWithIdx=alphaWithIdx.concat({a,idx})})
+  alphabet.forEach((a,idx)=>{alphaWithIdx=alphaWithIdx.concat({a,idx})})
 
   const alphaRow1 = alphaWithIdx.slice(0,13)
   const alphaRow2 = alphaWithIdx.slice(13)
 
-  useEffect(() => restart(), [user])
+  useEffect(() => {
+    restart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   const escKey = (e) => {
     e.preventDefault()
@@ -49,7 +52,7 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
       document.addEventListener('keyup', escKey)
     }
 
-    if (value === letter) {
+    if (value.toUpperCase() === letter.toUpperCase()) {
       totalMatch += 1 
       changeBgColor(null)
 
@@ -96,16 +99,16 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
         {alpha.map(a => {
           return (
               <span key={a.idx}>
-              <label><b>&nbsp;{a.a}&nbsp;</b></label>
-              <input
-                  disabled={a.idx !== 0 ? "disabled" : ""}
-                  type="text"
-                  id={a.idx}
-                  maxLength="1"
-                  onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
-                  style={{width: "20px", textAlign:"center"}}
-                  autoComplete="off"
-              />
+                <label><b>&nbsp;{a.a}&nbsp;</b></label>
+                <input
+                    disabled={a.idx !== 0 ? "disabled" : ""}
+                    type="text"
+                    id={a.idx}
+                    maxLength="1"
+                    onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
+                    style={{width: "20px", textAlign:"center"}}
+                    autoComplete="off"
+                />
               </span>
           )
         })}
