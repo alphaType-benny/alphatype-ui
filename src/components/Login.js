@@ -9,7 +9,6 @@ const Login = ({setUser, notification}) =>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [newUser, setNewUser] = useState(false)
-    const [show, setShow] = useState(false);
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -20,19 +19,19 @@ const Login = ({setUser, notification}) =>{
             }
             catch (exception){
                 notification("danger", <div>
-                "Invalid Credentials"
+                Invalid Credentials
                 <br/>
                 Username must be unique and have 3-12 characters
                 <br/>
                 Password must have at least 3 characters
                 </div>)
+                setPassword('')
                 return
             }
         }
 
         try {
             const user = await loginService.userLogin({username, password})
-            console.log(user);
             window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
 
             resultsService.setToken(user.token)
@@ -41,6 +40,7 @@ const Login = ({setUser, notification}) =>{
             setUser(user)
             notification("success", `Welcome ${user.username} & Happy alphaTyping!`)
           } catch (exception) {
+            setPassword('')
             notification("danger", "Wrong/Invalid Credentials")
           }
     }

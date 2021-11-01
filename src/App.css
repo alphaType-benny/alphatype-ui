@@ -50,7 +50,7 @@
 .mainContainer {
   font-family: 'Krub', sans-serif;
   display: grid;
-  padding: 0 10px;
+  padding: 0 10px 35px;
   grid-template-columns: 1fr 525px  1fr;
   grid-template-rows: 2, auto;
   column-gap: 80px;
@@ -82,7 +82,7 @@
 
 .loginContainer {
   display: grid;
-  padding: 0 10px;
+  padding: 0 10px 35px;
   grid-template-columns: 1fr 600px 1fr;
   grid-template-rows: 4, auto;
   justify-items: center;

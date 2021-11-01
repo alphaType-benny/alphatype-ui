@@ -38,7 +38,8 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
       (usersTopScore.slice(0,scoreToShow)).map((p, idx) => {
         return(
           <tr key={idx}>
-            <td style={{minWidth: "140px"}}>{idx+1}- {p.username}&nbsp;</td>
+            <td style={{minWidth: "25px", textAlign:"right"}}>{idx+1}-</td>
+            <td style={{minWidth: "140px"}}>{p.username}&nbsp;</td>
             <td>{p.totalTime}s</td>
           </tr>
         )
@@ -52,6 +53,7 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
       <table className="leaderboard">
       <tbody style={{textAlign: "left"}}>
         <tr>
+          <th></th>
           <th>User</th>
           <th>Time</th>
         </tr>
@@ -59,7 +61,7 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
       </tbody>
         
       </table>
-      <Button variant="link" size="sm" style={{textDecoration:"none"}} onClick={()=>setShowTop10(!showTop10)}>
+      <Button variant="link" size="sm" style={{textDecoration:"none", fontColor:"black"}} onClick={()=>setShowTop10(!showTop10)}>
         {buttonDisplay}
       </Button>
     </div>

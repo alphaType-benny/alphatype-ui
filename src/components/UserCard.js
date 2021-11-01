@@ -1,7 +1,7 @@
 
-import React from "react"
-import Button from 'react-bootstrap/Button';
-
+import React, {useState} from "react"
+import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 
 const UserCard = ({user, allUsers, usersTopScore, logout}) => {
     
@@ -12,10 +12,9 @@ const UserCard = ({user, allUsers, usersTopScore, logout}) => {
     let gamesPlayed = "0"
     
     if (userTopScore !== undefined){
-        
         if(userTopScore.totalTime !== null){
             const rank = 1 + usersTopScore.findIndex(u=>u.username === user.username)
-            rankDisplay = `${rank} (out of ${usersTopScore.length})`
+            rankDisplay = rank === 1 ? <Badge pill bg="warning" text="dark">{rank}</Badge> : rank
             personalBest = usersTopScore.length === 0 ? null : `${userTopScore.totalTime}s`
             gamesPlayed = userData.results.length
         }
