@@ -30,7 +30,7 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
   const escKey = (e) => {
     e.preventDefault()
 
-    if(e.key === "Escape"){
+    if(e.key === "Escape" || e.code === "Space"){
       restart()
     }
   }
@@ -38,39 +38,41 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
   const changeBgColor = (color) => document.getElementsByClassName("ctr-display")[0].style.backgroundColor = color;
 
   const spellCheck = async (id, letter, value) =>{
+    if(value !== " "){
+      if (!start){
+        setStart(Date.now())
+      }
 
-    if (!start){
-      setStart(Date.now())
-    }
+      if (letter === "a"){
+        timerInterval = setInterval(() => {
+          let varNow = Date.now()
+          setNow(varNow)
+        }, 1);
 
-    if (letter === "a"){
-      timerInterval = setInterval(() => {
-        let varNow = Date.now()
-        setNow(varNow)
-      }, 1);
+        document.addEventListener('keyup', escKey)
+      }
 
-      document.addEventListener('keyup', escKey)
-    }
+      if (value.toUpperCase() === letter.toUpperCase()) {
+        totalMatch += 1 
+        changeBgColor(null)
 
-    if (value.toUpperCase() === letter.toUpperCase()) {
-      totalMatch += 1 
-      changeBgColor(null)
-
-      if(letter === "z" && totalMatch === alphabet.length){
-        const score = (now-start)/1000
-        clearInterval(timerInterval)
-        await setLocalScore(score)
-        await resultsService.saveScore(score)
-        setTotalTime(score)
+        if(letter === "z" && totalMatch === alphabet.length){
+          const score = (now-start)/1000
+          clearInterval(timerInterval)
+          await setLocalScore(score)
+          await resultsService.saveScore(score)
+          setTotalTime(score)
+        }
+        else{
+          document.getElementById(id+1).removeAttribute("disabled")
+          document.getElementById(id+1).focus()
+        }
       }
       else{
-        document.getElementById(id+1).removeAttribute("disabled")
-        document.getElementById(id+1).focus()
+        changeBgColor("red")
       }
     }
-    else{
-      changeBgColor("red")
-    }
+    else{restart()}
   }
 
   const restart = () => {
@@ -127,7 +129,7 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
       {inputField(alphaRow1)}
       {inputField(alphaRow2)}
       <br/>
-      <Button variant="secondary" size="sm" onClick={()=>restart()}>Restart (ESC Key)</Button>
+      <Button variant="secondary" size="sm" onClick={()=>restart()}>Restart (Space Key)</Button>
     </div>
   )
 }

@@ -3,12 +3,13 @@ import React, {useState} from 'react'
 import loginService from "../services/login"
 import resultsService from "../services/results"
 import usersService from "../services/users"
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'
 
 const Login = ({setUser, notification}) =>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [newUser, setNewUser] = useState(false)
+    const [show, setShow] = useState(false);
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -18,7 +19,13 @@ const Login = ({setUser, notification}) =>{
                 await usersService.signUp({username, password})
             }
             catch (exception){
-                notification("danger", "Invalid Credentials")
+                notification("danger", <div>
+                "Invalid Credentials"
+                <br/>
+                Username must be unique and have 3-12 characters
+                <br/>
+                Password must have at least 3 characters
+                </div>)
                 return
             }
         }
@@ -46,7 +53,7 @@ const Login = ({setUser, notification}) =>{
         setNewUser(!newUser)
         setUsername('')
         setPassword('')
-    }
+    } 
 
     return (
         <div className="loginContainer">
@@ -62,7 +69,7 @@ const Login = ({setUser, notification}) =>{
                         name="Username"
                         size="12"
                         onChange={({ target }) => setUsername(target.value)}
-                    />
+                        />
                     </div>
                     <div className="loginField">
                     Password:&nbsp;
@@ -76,7 +83,6 @@ const Login = ({setUser, notification}) =>{
                     </div>
                     <br/>
                     <Button variant="secondary" type="submit">Submit</Button>
-                
                 </form>
                 <br/>
                 <div className="toggleLoginSignUp">
