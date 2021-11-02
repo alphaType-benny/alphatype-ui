@@ -5,14 +5,13 @@ import resultsService from "../services/results"
 import Button from 'react-bootstrap/Button';
 
 let timerInterval
+let totalKeyPress = 0
 
-//Prevent user from DOM manipulating and cheating
-let totalMatch = 0
-
-const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
+const LetterInput = ({user, setTotalTime}) =>{
   const [start, setStart] = useState("")
   const [now, setNow] = useState("")
-  
+  const [localScore, setLocalScore] = useState("")
+
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
 
@@ -53,15 +52,18 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
       }
 
       if (value.toUpperCase() === letter.toUpperCase()) {
-        totalMatch += 1 
+        
         changeBgColor(null)
 
-        if(letter === "z" && totalMatch === alphabet.length){
+        if(letter === "z" && totalKeyPress >= alphabet.length){
           const score = (now-start)/1000
           clearInterval(timerInterval)
           await setLocalScore(score)
           await resultsService.saveScore(score)
           setTotalTime(score)
+        }
+        else if(letter === "z" && totalKeyPress < alphabet.length){
+          restart()
         }
         else{
           document.getElementById(id+1).removeAttribute("disabled")
@@ -77,17 +79,17 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
 
   const restart = () => {
 
-    for(let idx=0; idx<alphabet.length; idx++){
-      const disabled = idx !== 0 ? "disabled" : ""
-      document.getElementById(idx).disabled = disabled
-      document.getElementById(idx).value = ""
+    for(let i=0; i<alphabet.length; i++){
+      const disabled = i !== 0 ? "disabled" : ""
+      document.getElementById(i).disabled = disabled
+      document.getElementById(i).value = ""
     }
 
-    totalMatch = 0
     setStart("")
     setNow("")
     setLocalScore("")
     setTotalTime("")
+    totalKeyPress = 0
 
     changeBgColor(null)
     document.getElementById(0).focus()
@@ -108,6 +110,7 @@ const LetterInput = ({user, setTotalTime, localScore, setLocalScore}) =>{
                     id={a.idx}
                     maxLength="1"
                     onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
+                    onKeyDown={()=>totalKeyPress += 1}
                     style={{width: "20px", textAlign:"center"}}
                     autoComplete="off"
                 />

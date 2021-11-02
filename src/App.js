@@ -1,7 +1,7 @@
 
 //State Management (Redux)
-//Multi-view (i.e. About Page)
 //Testing (Cypress?)
+//Multi-view (i.e. About Page)
 
 import React, {useState} from 'react'
 import Header from "./components/Header"
