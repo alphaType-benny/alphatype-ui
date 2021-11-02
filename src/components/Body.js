@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from "react"
 import resultsService from "../services/results"
-import usersService from "../services/users";
+import usersService from "../services/users"
 import Notification from "./Notification"
 import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
