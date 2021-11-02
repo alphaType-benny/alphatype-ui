@@ -28,18 +28,29 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUsers])
 
+  console.log(allUsers);
+
   const scoreToShow = showTop10 ? 10 : 5 
   const buttonDisplay = showTop10 ? "Show Less" : "Show More"
   const extraPadding = showTop10 ? "0" : "20px"
 
   const topUsers = () => {
-
+    let rank
     return(
       (usersTopScore.slice(0,scoreToShow)).map((p, idx) => {
+        const top3 = ["🏆","🥈","🥉"]
+
+        if(idx<=2){
+          rank = `${top3[idx]} `
+        }
+        else{
+          rank =<b>{idx+1}.</b>
+        }
+
         return(
           <tr key={idx}>
-            <td style={{minWidth: "25px", textAlign:"right"}}>{idx+1}-</td>
-            <td style={{minWidth: "140px"}}>{p.username}&nbsp;</td>
+            <td style={{minWidth: "30px", textAlign:"center"}}>{rank}</td>
+            <td style={{minWidth: "130px"}}>{p.username}&nbsp;</td>
             <td>{p.totalTime}s</td>
           </tr>
         )
