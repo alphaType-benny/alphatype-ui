@@ -28,8 +28,6 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUsers])
 
-  console.log(allUsers);
-
   const scoreToShow = showTop10 ? 10 : 5 
   const buttonDisplay = showTop10 ? "Show Less" : "Show More"
   const extraPadding = showTop10 ? "0" : "20px"
