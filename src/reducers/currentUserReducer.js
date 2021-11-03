@@ -10,7 +10,7 @@ export const setCurrentUser = (user) => {
     }
   }
   
-const reducer = (state = [], action) => {
+const reducer = (state = "", action) => {
 switch (action.type) {
     case 'CURRENTUSER':
     return action.data

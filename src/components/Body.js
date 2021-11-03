@@ -13,11 +13,12 @@ import { setToken } from '../reducers/resultReducer'
 import { setCurrentUser } from '../reducers/currentUserReducer'
 
 //const MainContainer = ({user, setUser}) => {
-const MainContainer = () => {
+const Body = () => {
     const dispatch = useDispatch()
 
     //const [allUsers, setAllUsers] = useState([])
     const allUsers = useSelector(state => state.user)
+
     const user = useSelector(state => {
         console.log("user", state);
         return state.currentUser
@@ -45,9 +46,7 @@ const MainContainer = () => {
         //   .then(res => setAllUsers(res))
         dispatch(getAllUsers())
     },[totalTime, dispatch])
-
-    
-    
+   
 
     const notification = (notifClass, notifMessage) => {
         setNotifClass(notifClass)
@@ -59,7 +58,7 @@ const MainContainer = () => {
 
     const logout = () => {
         //setUser(null)
-        setCurrentUser(null)
+        dispatch(setCurrentUser(null))
         return window.localStorage.removeItem('loggedAppUser')
     }
 
@@ -115,4 +114,4 @@ const MainContainer = () => {
     )
 }
 
-export default MainContainer
+export default Body

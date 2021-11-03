@@ -15,7 +15,7 @@ const App = () => {
   return(
     <div className="App">
       <Header user={user} />
-      <Body user={user} setUser={setUser} />
+      <Body/>
       <Footer/>
     </div>
   )
