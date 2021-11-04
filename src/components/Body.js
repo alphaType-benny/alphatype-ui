@@ -1,28 +1,19 @@
 
 import React, {useState, useEffect} from "react"
-//import resultsService from "../services/results"
-//import usersService from "../services/users"
+import { useSelector, useDispatch } from 'react-redux'
 import Notification from "./Notification"
 import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
-import { useSelector, useDispatch } from 'react-redux'
-import { getAllUsers } from '../reducers/userReducer'
+import { getAllUsers } from '../reducers/allUserReducer'
 import { setToken } from '../reducers/resultReducer'
 import { setCurrentUser } from '../reducers/currentUserReducer'
 
-//const MainContainer = ({user, setUser}) => {
 const Body = () => {
     const dispatch = useDispatch()
 
-    //const [allUsers, setAllUsers] = useState([])
-    const allUsers = useSelector(state => state.user)
-
-    const user = useSelector(state => {
-        console.log("user", state);
-        return state.currentUser
-    })
+    const user = useSelector(state => state.currentUser)
 
     const [usersTopScore, setUsersTopScore ] = useState([])
     const [totalTime, setTotalTime] = useState("")
@@ -33,20 +24,15 @@ const Body = () => {
         const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          //setUser(user)
           dispatch(setCurrentUser(user))
-          //resultsService.setToken(user.token)
           dispatch(setToken(user.token))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(()=>{
-        // usersService.getAll()
-        //   .then(res => setAllUsers(res))
         dispatch(getAllUsers())
     },[totalTime, dispatch])
-   
 
     const notification = (notifClass, notifMessage) => {
         setNotifClass(notifClass)
@@ -56,26 +42,16 @@ const Body = () => {
         }, 5000)
     }
 
-    const logout = () => {
-        //setUser(null) 
-        dispatch(setCurrentUser(null))
-        return window.localStorage.removeItem('loggedAppUser')
-    }
-
     const loggedInDisplay = () => {
         return(
           <div className = "mainContainer">
             <div className="left-display">
                 <UserCard
-                    user = {user}
-                    allUsers = {allUsers}
                     usersTopScore = {usersTopScore}
-                    logout = {logout}
                 />
             </div>
             <div className="ctr-display">
                 <LetterInput
-                    user = {user}
                     totalTime = {totalTime}
                     setTotalTime = {setTotalTime}
                 /> 
@@ -85,7 +61,6 @@ const Body = () => {
                     totalTime = {totalTime}
                     usersTopScore = {usersTopScore}
                     setUsersTopScore = {setUsersTopScore}
-                    allUsers = {allUsers}
                 />
             </div>
         </div>
@@ -106,7 +81,6 @@ const Body = () => {
                 loggedInDisplay()
                 :
                 <Login
-                    user={user}
                     notification={notification}
                 />
             }

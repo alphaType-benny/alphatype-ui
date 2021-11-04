@@ -4,7 +4,6 @@ export const setToken = (token) => {
     return async dispatch => {
     //const data = await anecdoteService.createNew(content)
         await resultsService.setToken(token)
-        console.log(token);
         dispatch({
         type: 'SETTOKEN'
         })

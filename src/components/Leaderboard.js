@@ -1,5 +1,6 @@
 
 import React, {useState, useEffect} from "react"
+import { useSelector} from 'react-redux'
 import Button from 'react-bootstrap/Button';
 
 const sortResults = (scores) => {  
@@ -8,8 +9,10 @@ const sortResults = (scores) => {
     }))
 }
 
-const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
+const Leaderboard =  ({usersTopScore, setUsersTopScore}) => {
+
   const [showTop10, setShowTop10] = useState(false)
+  const allUsers = useSelector(state => state.users)
 
   useEffect(() => {
     let topScores = []
@@ -20,7 +23,7 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore, allUsers}) => {
         if(u.results.length !== 0){
             userScore = sortResults(u.results)[0].totalTime
             const userData = {"username": u.username, "totalTime": userScore }
-            topScores = topScores.concat(userData)
+            topScores = [...topScores, userData]
         }
       })
       setUsersTopScore(sortResults(topScores))

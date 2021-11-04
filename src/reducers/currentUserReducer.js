@@ -1,6 +1,5 @@
 
 export const setCurrentUser = (user) => {
-    console.log("insidereducer", user)
     return async dispatch => {
         const data = user
         dispatch({
