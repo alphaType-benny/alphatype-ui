@@ -57,7 +57,7 @@ const Body = () => {
     }
 
     const logout = () => {
-        //setUser(null)
+        //setUser(null) 
         dispatch(setCurrentUser(null))
         return window.localStorage.removeItem('loggedAppUser')
     }
