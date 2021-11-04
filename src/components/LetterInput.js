@@ -1,5 +1,6 @@
 
 import React, {useState, useEffect} from "react"
+import { useSelector } from 'react-redux'
 import Timer from "./Timer"
 import resultsService from "../services/results"
 import Button from 'react-bootstrap/Button';
@@ -7,11 +8,11 @@ import Button from 'react-bootstrap/Button';
 let timerInterval
 let totalKeyPress = 0
 
-const LetterInput = ({user, setTotalTime}) =>{
+const LetterInput = ({setTotalTime}) =>{
   const [start, setStart] = useState("")
   const [now, setNow] = useState("")
   const [localScore, setLocalScore] = useState("")
-
+  const user = useSelector(state => state.currentUser)
   const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z']
 

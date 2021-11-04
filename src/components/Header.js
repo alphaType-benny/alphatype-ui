@@ -1,6 +1,9 @@
 
-const Header = ({user}) => {
+import { useSelector} from 'react-redux'
 
+const Header = () => {
+
+    const user = useSelector(state => state.currentUser)
     const padding = user ? "20px" : "10px"
 
     return(

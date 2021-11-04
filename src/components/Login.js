@@ -3,13 +3,18 @@ import React, {useState} from 'react'
 import loginService from "../services/login"
 import resultsService from "../services/results"
 import usersService from "../services/users"
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from '../reducers/currentUserReducer'
 import Button from 'react-bootstrap/Button'
 
-const Login = ({setUser, notification}) =>{
+const Login = ({notification}) =>{
+
+    const dispatch = useDispatch()
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [newUser, setNewUser] = useState(false)
-
+    
     const handleLogin = async (event) => {
         event.preventDefault()
         
@@ -37,7 +42,9 @@ const Login = ({setUser, notification}) =>{
             resultsService.setToken(user.token)
             setUsername('')
             setPassword('')
-            setUser(user)
+            
+            dispatch(setCurrentUser(user))
+            
             notification("success", `Welcome ${user.username} & Happy alphaTyping!`)
           } catch (exception) {
             setPassword('')
