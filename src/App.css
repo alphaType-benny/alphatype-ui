@@ -40,6 +40,7 @@
 .header{
   border-bottom: 1px black solid;
   margin: 0;
+  width: 100%;
 }
 
 .gameTitle{
@@ -47,37 +48,152 @@
   margin: 0;
 }
 
-.mainContainer {
-  font-family: 'Krub', sans-serif;
-  display: grid;
-  padding: 0 10px 35px;
-  grid-template-columns: 1fr 525px  1fr;
-  grid-template-rows: 2, auto;
-  column-gap: 80px;
-  justify-items: center;
-  justify-content: center;   
+@media (min-width: 376px){
+  .mainContainer {
+    font-family: 'Krub', sans-serif;
+    display: grid;
+    padding: 0 10px 35px;
+    grid-template-columns: 1fr 525px  1fr;
+    grid-template-rows: 2, auto;
+    column-gap: 80px;
+    justify-items: center;
+    justify-content: center;   
+  }
+
+  .ctr-display {
+    border: 1px black solid;
+    border-radius: 5px;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    padding: 20px 50px 10px;
+  }
+
+  .left-display {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding-top: 20px;
+    justify-self: end;
+  }
+
+  .right-display {
+    grid-column: 3/4;
+    grid-row: 1/3;
+    padding-top: 0px;
+    justify-self: start;
+  }
+
+  .notifFlex{
+    height: 60px;
+  }
+
+  .letterInputFlex{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+  
+  .letterInputSpan{
+    width: 25px;
+  }
+
+  .inputStyle{
+    width: 22px;
+    text-align: center;
+  }
+
+  .letterInputFields{
+    margin: 30px 0;
+  }
+
+  .rankDisplay{
+    margin-bottom: 20px;
+  }
+
+  .userStats{
+    display: flex;
+    justify-content: center;
+  }
+
+  .logoutButton{
+    border: none;
+    margin: 20px;
+  }
 }
 
-.ctr-display {
-  border: 1px black solid;
-  border-radius: 5px;
-  grid-column: 2/3;
-  grid-row: 1/2;
-  padding: 20px 50px 10px;
-}
+@media (max-width: 375px){
+  .mainContainer {
+    font-family: 'Krub', sans-serif;
+    display: grid;
+    padding: 0 10px 35px;
+    margin: auto;
+    width: 370px;
+    grid-template-columns: 1;
+    grid-template-rows: 3;
+    
+  }
 
-.left-display {
-  grid-column: 1/2;
-  grid-row: 1/2;
-  padding-top: 20px;
-  justify-self: end;
-}
+  .ctr-display {
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 20px 0;
+    grid-column: 1;
+    grid-row: 2/3;
+  }
+  
+  .left-display {
+    grid-column: 1;
+    grid-row: 1/2;
+  }
+  
+  .right-display {
+    grid-column: 1;
+    grid-row: 3/4;
+    padding-top: 0px;
+  }
 
-.right-display {
-  grid-column: 3/4;
-  grid-row: 1/3;
-  padding-top: 0px;
-  justify-self: start;
+  .notifFlex{
+    height: 40px;
+  }
+
+  .letterInputFlex{
+    display: flex;
+    justify-content: center;
+  }
+
+  .letterInputSpan{
+    width: 25px;
+  }
+
+  .letterInput{
+    width: 18px;
+    text-align: center;
+  }
+
+  .letterInputFields{
+    margin-bottom: 20px;
+  }
+
+  .userCard{
+    margin-bottom: 20px;
+  }
+
+  .rankDisplay{
+    margin-bottom: 10px;
+  }
+
+  .userStats{
+    display: none;
+    justify-content: center;
+  }
+  
+  .logoutButton{
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  .leaderContainer{
+    margin-top: 20px;
+  }
 }
 
 .loginContainer {
@@ -111,17 +227,6 @@
   text-align: center;
 }
 
-.letterInput{
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-}
-
-.userStats{
-  display: flex;
-  justify-content: center;
-}
-
 .leaderboard{
   display: flex;
   justify-content: center;
@@ -146,10 +251,6 @@
   border-radius: 5px;
   padding: 5px;
   margin:0 50px;
-}
-
-.notifFlex{
-  height: 60px;
 }
 
 .footer{
