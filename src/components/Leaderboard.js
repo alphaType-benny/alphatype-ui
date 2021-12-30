@@ -60,7 +60,7 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore}) => {
   }
  
   return(
-    <div>
+    <div className="leaderContainer">
       <h3 style={{paddingTop:extraPadding}}><u>Leaderboard</u></h3>
       <table className="leaderboard">
       <tbody style={{textAlign: "left"}}>
@@ -73,7 +73,7 @@ const Leaderboard =  ({usersTopScore, setUsersTopScore}) => {
       </tbody>
         
       </table>
-      <Button variant="link" size="sm" style={{textDecoration:"none", fontColor:"black"}} onClick={()=>setShowTop10(!showTop10)}>
+      <Button variant="link" size="sm" style={{textDecoration:"none", color:"grey"}} onClick={()=>setShowTop10(!showTop10)}>
         {buttonDisplay}
       </Button>
     </div>

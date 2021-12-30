@@ -100,10 +100,10 @@ const LetterInput = ({setTotalTime}) =>{
   const inputField = (alpha) => {
     
     return(
-      <div className="letterInput">
+      <div className="letterInputFlex">
         {alpha.map(a => {
           return (
-              <span key={a.idx}>
+              <span key={a.idx} className="letterInputSpan">
                 <label><b>&nbsp;{a.a}&nbsp;</b></label>
                 <input
                     disabled={a.idx !== 0 ? "disabled" : ""}
@@ -113,6 +113,7 @@ const LetterInput = ({setTotalTime}) =>{
                     onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
                     onKeyDown={()=>totalKeyPress += 1}
                     style={{width: "20px", textAlign:"center"}}
+                    className="LetterInput"
                     autoComplete="off"
                 />
               </span>
@@ -129,10 +130,10 @@ const LetterInput = ({setTotalTime}) =>{
         start={start}
         localScore = {localScore}
       />
-      <br/>
-      {inputField(alphaRow1)}
-      {inputField(alphaRow2)}
-      <br/>
+      <div className="letterInputFields">
+        {inputField(alphaRow1)}
+        {inputField(alphaRow2)}
+      </div>
       <Button variant="secondary" size="sm" onClick={()=>restart()}>Restart (Space Key)</Button>
     </div>
   )
