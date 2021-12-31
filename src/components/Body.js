@@ -6,7 +6,8 @@ import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
-import logoutButton from "./LogoutButton"
+import LogoutButton from "./LogoutButton"
+import Instructions from "./Instructions"
 import { getAllUsers } from '../reducers/allUserReducer'
 import { setToken } from '../reducers/resultReducer'
 import { setCurrentUser } from '../reducers/currentUserReducer'
@@ -51,7 +52,7 @@ const Body = () => {
                     usersTopScore = {usersTopScore}
                 />
                 <div className="logoutWeb">
-                    {logoutButton()}
+                    <LogoutButton/>
                 </div>
             </div>
             <div className="ctr-display">
@@ -67,38 +68,13 @@ const Body = () => {
                     setUsersTopScore = {setUsersTopScore}
                 />
             </div>
+            <div className="instructions">
+                <Instructions/>
+            </div>
             <div className="logoutMobile">
-                {logoutButton()}
+                <LogoutButton/>
             </div>
         </div>
-        )
-    }
-
-    const gamePreview = () => {
-        return(
-            <div classNmae="previewContainer">
-                <div className = "mainContainer" style={{filter:"blur(4px)"}}>
-                    <div className="left-display">
-                        <h3 style={{margin:0}}>Welcome, NewPlayer</h3>
-                    </div>
-                    <div className="ctr-display">
-                        <LetterInput
-                            totalTime = {totalTime}
-                            setTotalTime = {setTotalTime}
-                        /> 
-                    </div>
-                    <div className = "right-display">
-                        <Leaderboard
-                            totalTime = {totalTime}
-                            usersTopScore = {usersTopScore}
-                            setUsersTopScore = {setUsersTopScore}
-                        />
-                    </div>
-                </div>
-                <Login
-                    notification={notification}
-                />
-            </div>
         )
     }
 
@@ -114,7 +90,11 @@ const Body = () => {
             {
                 user ?
                 loggedInDisplay() :
-                <div> {gamePreview()} </div>
+                <div>
+                    <Login
+                        notification={notification}
+                    />
+                </div>
             }
         </div>
     )
