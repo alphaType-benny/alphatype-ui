@@ -8,16 +8,16 @@ const GameDescription = () => {
             <p>You will be ranked amongst the best alphaTypers in the world! </p>
             <div className="gameDescImgs">
                 <img
-                    src="/hands-and-keyboard-svgrepo-com.svg"
+                    src="/hands-and-keyboard.svg"
                     className="gameDescImg"
-                    alt="timer"
+                    alt="typing on keyboard"
                     height="120"
                     width="120"
                 />
                 <img
-                    src="/speed-svgrepo-com.svg"
+                    src="/speed-running.svg"
                     className="gameDescImg"
-                    alt="timer"
+                    alt="speed"
                     height="70"
                     width="70"
                 />
