@@ -48,7 +48,7 @@
   margin: 0;
 }
 
-@media (min-width: 376px){
+@media (min-width: 1025px) {
   .mainContainer {
     font-family: 'Krub', sans-serif;
     display: grid;
@@ -66,6 +66,7 @@
     grid-column: 2/3;
     grid-row: 1/2;
     padding: 20px 50px 10px;
+    justify-self: stretch;
   }
 
   .left-display {
@@ -96,7 +97,7 @@
     width: 25px;
   }
 
-  .inputStyle{
+  .letterInput{
     width: 22px;
     text-align: center;
   }
@@ -114,13 +115,95 @@
     justify-content: center;
   }
 
-  .logoutButton{
-    border: none;
+  .logoutWeb{
+    margin: 20px;
+  }
+
+  .logoutMobile{
+    display: none;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 1024px){
+  .mainContainer {
+    font-family: 'Krub', sans-serif;
+    display: grid;
+    padding: 0 10px 35px;
+    margin: auto;
+    width: 525px;
+    grid-template-columns: 1;
+    grid-template-rows: 3;
+    
+  }
+
+  .ctr-display {
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 20px 0;
+    grid-column: 1;
+    grid-row: 2/3;
+  }
+  
+  .left-display {
+    grid-column: 1;
+    grid-row: 1/2;
+  }
+  
+  .right-display {
+    grid-column: 1;
+    grid-row: 3/4;
+    padding-top: 0px;
+  }
+
+  .notifFlex{
+    height: 40px;
+  }
+
+  .letterInputFlex{
+    display: flex;
+    justify-content: center;
+  }
+
+  .letterInputSpan{
+    width: 25px;
+  }
+
+  .letterInput{
+    width: 22px;
+    text-align: center;
+  }
+
+  .letterInputFields{
+    margin-bottom: 20px;
+  }
+
+  .userCard{
+    margin-bottom: 20px;
+  }
+
+  .rankDisplay{
+    margin-bottom: 0;
+  }
+
+  .userStats{
+    margin: 0 auto 10px;
+    justify-self: center;
+  }
+
+  .leaderContainer{
+    margin-top: 20px;
+  }
+
+  .logoutWeb{
+    display: none;
+  }
+
+  .logoutMobile{
     margin: 20px;
   }
 }
 
-@media (max-width: 375px){
+@media (max-width: 414px){
   .mainContainer {
     font-family: 'Krub', sans-serif;
     display: grid;
@@ -165,7 +248,7 @@
   }
 
   .letterInput{
-    width: 18px;
+    width: 20px;
     text-align: center;
   }
 
@@ -178,20 +261,24 @@
   }
 
   .rankDisplay{
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .userStats{
-    display: none;
-    justify-content: center;
-  }
-  
-  .logoutButton{
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
+    justify-self: center;
   }
 
   .leaderContainer{
     margin-top: 20px;
+  }
+
+  .logoutWeb{
+    display: none;
+  }
+
+  .logoutMobile{
+    margin: 20px;
   }
 }
 

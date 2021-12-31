@@ -112,8 +112,7 @@ const LetterInput = ({setTotalTime}) =>{
                     maxLength="1"
                     onChange={(e)=>spellCheck(a.idx, a.a, e.target.value)}
                     onKeyDown={()=>totalKeyPress += 1}
-                    style={{width: "20px", textAlign:"center"}}
-                    className="LetterInput"
+                    className="letterInput"
                     autoComplete="off"
                 />
               </span>

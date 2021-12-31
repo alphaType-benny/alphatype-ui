@@ -1,15 +1,10 @@
 
-import React, {useState} from "react"
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentUser } from '../reducers/currentUserReducer'
-import Button from 'react-bootstrap/Button'
+import React from "react"
+import { useSelector} from 'react-redux'
 import Badge from 'react-bootstrap/Badge'
 
 
-
 const UserCard = ({usersTopScore}) => {
-
-    const dispatch = useDispatch()
 
     const user = useSelector(state => state.currentUser)
     const allUsers = useSelector(state => state.users)
@@ -31,13 +26,6 @@ const UserCard = ({usersTopScore}) => {
         }
     }
 
-
-    const logout = () => {
-        //setUser(null) 
-        dispatch(setCurrentUser(null))
-        return window.localStorage.removeItem('loggedAppUser')
-    }
-
     return(
         <div className="userCard">
             <h3 style={{margin:0}}>Welcome, {user.username}</h3>
@@ -54,7 +42,6 @@ const UserCard = ({usersTopScore}) => {
                     </tr>
                 </tbody>
             </table>
-            <Button className="logoutButton" variant="outline-secondary" size="sm" onClick={()=>logout()}>Logout</Button>
         </div>        
     )
 }
