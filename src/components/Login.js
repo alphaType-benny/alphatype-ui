@@ -6,6 +6,7 @@ import usersService from "../services/users"
 import { useDispatch } from 'react-redux'
 import { setCurrentUser } from '../reducers/currentUserReducer'
 import Button from 'react-bootstrap/Button'
+import GameDescription from "./GameDescription"
 
 const Login = ({notification}) =>{
 
@@ -13,7 +14,7 @@ const Login = ({notification}) =>{
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [newUser, setNewUser] = useState(false)
+    const [newUser, setNewUser] = useState(true)
     
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -63,39 +64,43 @@ const Login = ({notification}) =>{
     } 
 
     return (
-        <div className="loginContainer">
-            <div className="loginDisplay">
-                <form onSubmit={handleLogin}>
-                    <h3>{inputTitle}</h3>
-                    <br/>
-                    <div className="loginField">
-                    Username:&nbsp;
-                        <input
-                        type="text"
-                        value={username}
-                        name="Username"
-                        size="12"
-                        onChange={({ target }) => setUsername(target.value)}
+        <div>
+            <div className="loginContainer">
+                <div className="loginDisplay">
+                    <form onSubmit={handleLogin}>
+                        <h3>{inputTitle}</h3>
+                        <br/>
+                        <div className="loginField">
+                        Username:&nbsp;
+                            <input
+                            type="text"
+                            value={username}
+                            name="Username"
+                            size="12"
+                            onChange={({ target }) => setUsername(target.value)}
+                            />
+                        </div>
+                        <div className="loginField">
+                        Password:&nbsp;
+                            <input
+                            type="password"
+                            value={password}
+                            name="Password"
+                            size="12"
+                            onChange={({ target }) => setPassword(target.value)}
                         />
+                        </div>
+                        <Button className="loginButton" variant="secondary" type="submit">Submit</Button>
+                    </form>
+                    <div className="toggleLoginSignUp">
+                        <div>{promptText}</div>
+                        <Button variant="link" style={{paddingTop: '0'}} onClick={switchInput}>{promptOption}</Button>
                     </div>
-                    <div className="loginField">
-                    Password:&nbsp;
-                        <input
-                        type="password"
-                        value={password}
-                        name="Password"
-                        size="12"
-                        onChange={({ target }) => setPassword(target.value)}
-                    />
-                    </div>
-                    <br/>
-                    <Button variant="secondary" type="submit">Submit</Button>
-                </form>
-                <br/>
-                <div className="toggleLoginSignUp">
-                    <div>{promptText}</div>
-                    <Button variant="link" style={{paddingTop: '0'}} onClick={switchInput}>{promptOption}</Button>
                 </div>
+                
+            </div>
+            <div className="gameDescription">
+                {newUser ? <GameDescription/> : ""}
             </div>
         </div>
     )

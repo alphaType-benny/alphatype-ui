@@ -6,6 +6,8 @@ import LetterInput from "./LetterInput"
 import Leaderboard from "./Leaderboard"
 import UserCard from "./UserCard"
 import Login from "./Login"
+import LogoutButton from "./LogoutButton"
+import Instructions from "./Instructions"
 import { getAllUsers } from '../reducers/allUserReducer'
 import { setToken } from '../reducers/resultReducer'
 import { setCurrentUser } from '../reducers/currentUserReducer'
@@ -49,6 +51,9 @@ const Body = () => {
                 <UserCard
                     usersTopScore = {usersTopScore}
                 />
+                <div className="logoutWeb">
+                    <LogoutButton/>
+                </div>
             </div>
             <div className="ctr-display">
                 <LetterInput
@@ -62,6 +67,12 @@ const Body = () => {
                     usersTopScore = {usersTopScore}
                     setUsersTopScore = {setUsersTopScore}
                 />
+            </div>
+            <div className="instructions">
+                <Instructions/>
+            </div>
+            <div className="logoutMobile">
+                <LogoutButton/>
             </div>
         </div>
         )
@@ -78,11 +89,12 @@ const Body = () => {
             
             {
                 user ?
-                loggedInDisplay()
-                :
-                <Login
-                    notification={notification}
-                />
+                loggedInDisplay() :
+                <div>
+                    <Login
+                        notification={notification}
+                    />
+                </div>
             }
         </div>
     )
