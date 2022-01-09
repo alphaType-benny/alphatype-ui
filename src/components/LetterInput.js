@@ -114,6 +114,7 @@ const LetterInput = ({setTotalTime}) =>{
                     onKeyDown={()=>totalKeyPress += 1}
                     className="letterInput"
                     autoComplete="off"
+                    autoCapitalize="none"
                 />
               </span>
           )
